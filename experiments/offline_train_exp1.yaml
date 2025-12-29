@@ -19,7 +19,7 @@ DATASET:
   ROOT: '/home/user-wwy/Dataset'
   DATANAME: 'speedplusv2'
   CAMERA: 'camera.json'
-  KEYPOINTS: 'models/tangoPoints.mat' # w.r.t. DATASET.ROOT
+  KEYPOINTS: '/home/user-wwy/spnv2/core/utils/models/tangoPoints.mat'
   CADMODEL:  'models/tango.ply'       # w.r.t. DATASET.ROOT
   IMAGE_SIZE: [1920, 1200]
   INPUT_SIZE: [768, 512]
