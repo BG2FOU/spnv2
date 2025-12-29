@@ -18,9 +18,9 @@ _C = CN()
 # ------------------------------------------------------------------------------ #
 # Basic settings
 # ------------------------------------------------------------------------------ #
-_C.ROOT       = '/media/shared/Jeff/SLAB/spnv2'     # Root directory of this project (.../spnv2)
+_C.ROOT       = '/home/user-wwy/spnv2'     # Root directory of this project (.../spnv2)
 _C.OUTPUT_DIR = 'outputs'                           # Name of the folder to save training outputs
-_C.LOG_DIR    = 'log'                               # Name of the folder to save trainings logs
+_C.LOG_DIR    = 'logs'                               # Name of the folder to save trainings logs
 _C.EXP_NAME   = 'exp1'                              # Current experiment name
 
 # Basic settings
@@ -49,8 +49,8 @@ _C.DIST.MULTIPROCESSING_DISTRIBUTED = False
 _C.DATASET = CN()
 
 # - Basic directory & files
-_C.DATASET.ROOT      = '/Users/taehapark/SLAB/Dataset'      # Root directory of all datasets
-_C.DATASET.DATANAME  = 'speedplus'                          # Dataset name
+_C.DATASET.ROOT      = '/home/user-wwy/Dataset'      # Root directory of all datasets
+_C.DATASET.DATANAME  = 'speedplusv2'                          # Dataset name
 _C.DATASET.CAMERA    = 'camera.json'                        # .json file containing camera parameters
 _C.DATASET.KEYPOINTS = 'models/tangoPoints.mat'             # .mat file containing [3 x N] keypoints (m)
 _C.DATASET.CADMODEL  = 'models/tango.ply'                   # .ply file containing target 3D model
