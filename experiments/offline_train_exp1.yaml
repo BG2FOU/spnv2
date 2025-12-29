@@ -30,7 +30,7 @@ DATASET:
   SIGMA: 2 # for 'heatmap' head
 AUGMENT:
   P: 0.5
-  APPLY_TEXTURE_RANDOMIZATION: True
+  APPLY_TEXTURE_RANDOMIZATION: False
   RANDOM_TEXTURE:
     ALPHA: 0.5 # Degree of randomization
     PROB:  0.5 # Prob. of performing texture rand.
