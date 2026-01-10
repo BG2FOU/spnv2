@@ -4,9 +4,9 @@ LOG_DIR:    'logs'
 SEED: 2025
 AUTO_RESUME: True
 CUDA: True
-FP16: True
+FP16: False
 VERBOSE: True
-EXP_NAME: 'exp1'
+EXP_NAME: 'exp1_pro'
 DIST:
   MULTIPROCESSING_DISTRIBUTED: True
   BACKEND: 'nccl'
@@ -30,7 +30,7 @@ DATASET:
   SIGMA: 2 # for 'heatmap' head
 AUGMENT:
   P: 0.5
-  APPLY_TEXTURE_RANDOMIZATION: False
+  APPLY_TEXTURE_RANDOMIZATION: False # styles_ 缺失，禁用风格化
   RANDOM_TEXTURE:
     ALPHA: 0.5 # Degree of randomization
     PROB:  0.5 # Prob. of performing texture rand.
@@ -43,15 +43,15 @@ TRAIN:
   TRAIN_CSV: 'synthetic/labels/train.csv'
   VAL_CSV:   'synthetic/labels/validation.csv'
   BEGIN_EPOCH: 0
-  END_EPOCH: 20
+  END_EPOCH: 50
   VALID_FREQ: 1
   VALID_FRACTION: 0.1   # (0, 1]
   IMAGES_PER_GPU: 4
   OPTIMIZER: AdamW
-  LR: 1.0e-3
+  LR: 1.0e-4
   SCHEDULER: 'step'
   LR_FACTOR: 0.1
-  LR_STEP: [15, 18]
+  LR_STEP: [35, 45]
   GAMMA1: 0.9
   GAMMA2: 0.999
   WD: 1.0e-4

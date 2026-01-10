@@ -258,16 +258,43 @@ def do_valid(epoch, cfg, model, data_loader, camera, keypts_true_3D,
 
         # Save individual performances
         errorfn = os.path.join(log_dir, 'per_sample_performance.mat')
-        savemat(errorfn, per_sample_metrics, appendmat=False)
-        logger.info(f'Per-sample performances saved to {errorfn}')
+        # Filter out None values from per_sample_metrics
+        filtered_metrics = {}
+        for k, v in per_sample_metrics.items():
+            if isinstance(v, list):
+                filtered_v = [x for x in v if x is not None]
+                if filtered_v:
+                    filtered_metrics[k] = filtered_v
+            elif v is not None:
+                filtered_metrics[k] = v
+        
+        if filtered_metrics:
+            savemat(errorfn, filtered_metrics, appendmat=False)
+            logger.info(f'Per-sample performances saved to {errorfn}')
+        else:
+            logger.warning(f'No per-sample performances to save (all metrics were empty or None)')
 
         # Write predictions
         # predfn = os.path.join(log_dir, 'predictions_raw_shirt.mat')
         # savemat(predfn, {'hmap': heatmaps, 'hmap_q': q_hmap, 'hmap_t': t_hmap, 'eff_R': R_reg, 'eff_t': t_reg}, appendmat=False)
 
         predfn = os.path.join(log_dir, 'predictions_pose.mat')
-        savemat(predfn, {'heat_q': q_hmap, 'heat_t': t_hmap, 'effi_R': R_reg, 'effi_t': t_reg, 'bbox': bbox_reg, 'reject': h_reject}, appendmat=False)
-        logger.info(f'Pose predictions saved to {predfn}')
+        # Filter out None values before saving to .mat file
+        pred_dict = {
+            'heat_q': [x for x in q_hmap if x is not None] if q_hmap else None,
+            'heat_t': [x for x in t_hmap if x is not None] if t_hmap else None,
+            'effi_R': [x for x in R_reg if x is not None] if R_reg else None,
+            'effi_t': [x for x in t_reg if x is not None] if t_reg else None,
+            'bbox': [x for x in bbox_reg if x is not None] if bbox_reg else None,
+            'reject': h_reject
+        }
+        # Only save non-empty arrays
+        pred_dict = {k: v for k, v in pred_dict.items() if v is not None and len(v) > 0}
+        if pred_dict:
+            savemat(predfn, pred_dict, appendmat=False)
+            logger.info(f'Pose predictions saved to {predfn}')
+        else:
+            logger.warning(f'No pose predictions to save (all arrays were empty or None)')
 
     return metrics['final_pose'].avg
 

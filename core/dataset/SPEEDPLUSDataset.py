@@ -124,13 +124,15 @@ class SPEEDPLUSDataset(torch.utils.data.Dataset):
                    'boundingbox':    torch.from_numpy(anno['boundingbox']),
                    'quaternion':     torch.from_numpy(anno['quaternion']),
                    'rotationmatrix': torch.from_numpy(anno['rotationmatrix']),
-                   'translation':    torch.from_numpy(anno['translation'])}
+                   'translation':    torch.from_numpy(anno['translation']),
+                   'image_name':     anno['imgpath']}
+
+        # Add mask to targets if available (for both train and test)
+        if self.load_masks and 'mask' in anno:
+            targets['mask'] = anno['mask']
 
         # Additional targets if training
         if self.is_train:
-            if self.load_masks:
-                targets['mask'] = anno['mask']
-
             for i, h in enumerate(self.head_names):
                 if h == 'heatmap':
                     heatmap = self.target_generators[i](anno['keypoints']).astype(np.float32)

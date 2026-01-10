@@ -111,6 +111,13 @@ def main_worker(gpu, ngpus_per_node, args, output_dir, log_dir):
     if args.gpu is not None:
         print(f'Use GPU: {args.gpu} for training')
 
+    # Set CUDA device BEFORE initializing process group for NCCL
+    if args.gpu is not None:
+        torch.cuda.set_device(args.gpu)
+        device = torch.device('cuda', args.gpu)
+    else:
+        device = torch.device('cuda')
+
     # Distributed?
     if args.distributed:
         if args.dist_url == "env://" and args.rank == -1:
@@ -138,13 +145,6 @@ def main_worker(gpu, ngpus_per_node, args, output_dir, log_dir):
 
     # build network
     model = build_spnv2(cfg)
-
-    # GPU device
-    if args.gpu is not None:
-        torch.cuda.set_device(args.gpu)
-        device = torch.device('cuda', args.gpu)
-    else:
-        device = torch.device('cuda')
 
     if args.distributed:
         # SyncBN
@@ -180,7 +180,7 @@ def main_worker(gpu, ngpus_per_node, args, output_dir, log_dir):
                                   load_labels=True)
     val_loader   = get_dataloader(cfg,
                                   split='val',
-                                  distributed=args.distributed,
+                                  distributed=False,
                                   load_labels=True)
 
     # Optimizer & scaler for mixed-precision training

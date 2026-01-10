@@ -37,7 +37,7 @@ def save_checkpoint(states, is_best, is_final, output_dir, filename='checkpoint.
 
 def load_checkpoint(checkpoint_file, model, optimizer=None, scaler=None, device=torch.device('cpu')):
     # Load checkpoint if it exists
-    load_dict = torch.load(checkpoint_file, map_location=device)
+    load_dict = torch.load(checkpoint_file, map_location=device, weights_only=False)
 
     # Load model checkpoint
     model.load_state_dict(load_dict['state_dict'], strict=True)

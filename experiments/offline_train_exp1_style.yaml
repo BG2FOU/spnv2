@@ -6,7 +6,7 @@ AUTO_RESUME: True
 CUDA: True
 FP16: True
 VERBOSE: True
-EXP_NAME: 'exp1'
+EXP_NAME: 'exp1_style'
 DIST:
   MULTIPROCESSING_DISTRIBUTED: True
   BACKEND: 'nccl'
@@ -30,7 +30,7 @@ DATASET:
   SIGMA: 2 # for 'heatmap' head
 AUGMENT:
   P: 0.5
-  APPLY_TEXTURE_RANDOMIZATION: False
+  APPLY_TEXTURE_RANDOMIZATION: True
   RANDOM_TEXTURE:
     ALPHA: 0.5 # Degree of randomization
     PROB:  0.5 # Prob. of performing texture rand.

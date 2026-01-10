@@ -1,0 +1,40 @@
+% 性能对比表 (姿态相关) / Performance comparison (pose)
+\begin{table}[htbp]
+\centering
+\caption{姿态指标 (Pose) — tools/test.py: heat\_eR, heat\_eT, effi\_eR, effi\_eT, final\_pose}
+\label{tab:performance}
+\begin{tabular}{lccccc}
+\toprule
+域/Domain & 样本数 & 旋转误差 Rot($^\circ$) & 平移误差 Trans(m) & Seg IoU & SPEED \
+\midrule
+lightbox & 6740 & 6.83$\pm$23.01 & 0.184$\pm$0.930 & 0.907 & 0.147 \
+synthetic & 3598 & 1.28$\pm$3.03 & 0.039$\pm$0.037 & 0.958 & 0.029 \
+sunlamp & 2791 & 13.34$\pm$33.28 & 0.254$\pm$0.952 & 0.883 & 0.274 \
+\midrule
+\textbf{Overall} & 13129 & \textbf{6.69}$\pm$22.96 & \textbf{0.159}$\pm$0.802 & \textbf{0.916} & \textbf{0.142} \
+\bottomrule
+\end{tabular}
+\end{table}
+
+% 光学特征与分割指标 / Optical & Segmentation metrics
+\begin{table}[htbp]
+\centering
+\caption{光学特征 (heatmap) 与分割 (segmentation) — heat\_eR, heat\_eT, segm\_iou 等}
+\label{tab:optical}
+\begin{tabular}{lccccccc}
+\toprule
+域/Domain & 样本数 & 热图旋转 Rot($^\circ$) & 热图平移 Trans(m) & 关键点召回 KptRec & Seg IoU & Seg F1 & Pixel Acc \
+\midrule
+lightbox & 6740 & 6.35$\pm$23.14 & 0.189$\pm$1.206 & 0.915 & 0.907 & 0.947 & 0.991 \
+synthetic & 3598 & 0.93$\pm$3.06 & 0.040$\pm$0.041 & 0.967 & 0.958 & 0.978 & 0.997 \
+sunlamp & 2791 & 12.71$\pm$33.10 & 0.262$\pm$1.259 & 0.858 & 0.883 & 0.935 & 0.990 \
+\midrule
+\textbf{Overall} & 13129 & \textbf{6.22}$\pm$22.95 & \textbf{0.164}$\pm$1.044 & \textbf{0.917} & \textbf{0.916} & \textbf{0.953} & \textbf{0.993} \
+\bottomrule
+\end{tabular}
+\end{table}
+\midrule
+\textbf{Overall} & 13129 & \textbf{6.22}$\pm$22.95 & \textbf{0.164}$\pm$1.044 & \textbf{0.917} & \textbf{0.916} & \textbf{0.953} & \textbf{0.993} \
+\bottomrule
+\end{tabular}
+\end{table}
